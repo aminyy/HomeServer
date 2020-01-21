@@ -1,0 +1,634 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<model name="prms4">
+    <var attribute="hruparameterInputPath" value="IO/Input/hruparameter.dat" type="PoolString"/>
+    <var attribute="TparameterInputPath" value="IO/Input/Timeparameter.dat" type="PoolString"/>
+    <var attribute="rain_adjInputPath1" value="IO/Input/2Drain_adj.dat" type="PoolString"/>
+    <var attribute="snow_adjInputPath2" value="IO/Input/2Dsnow_adj.dat" type="PoolString"/>
+    <var attribute="strain_adjInputPath3" value="IO/Input/2Dstrain_adj.dat" type="PoolString"/>
+    <var attribute="obsInputPath" value="IO/Input/data_lucatest.dat" type="PoolString"/>
+    <var attribute="hru_flagInputPath" value="IO/Input/hru_flag.asc" type="PoolString"/>
+    <var attribute="outputPath" value="IO/Input/Output.dat" type="PoolString"/>
+    <context class="net.casnw.home.model.TemporalContext" name="temp">
+		<var attribute="iteratorNum" value="2191" type="PoolInteger"/>
+		<module class="prms.io.ObsIO" name="ObsIO" url="">
+		        <var attribute="obsInputPath" name="obsInputPath" context="prms4"/>
+                <var attribute="nobs" name="nobs" value="1"/>
+				<var attribute="nrain" name="nrain" value="5"/>
+				<var attribute="ntemp" name="ntemp" value="2"/>
+				<var attribute="starttime" name="starttime" value="1980-10-01 00:00:00"/>
+			    <var attribute="rain_code" name="rain_code" value="0,0,0,0,0,0,0,0,0,0,0,0"/>
+				<var attribute="deltim" name="deltim" type="PoolDouble"/>
+				<var attribute="route_on" name="route_on" type="PoolInteger"/>
+				<var attribute="date_year" name="date_year" type="PoolInteger"/>
+				<var attribute="date_mo" name="date_mo" type="PoolInteger"/>
+				<var attribute="date_day" name="date_day" type="PoolInteger"/>
+				<var attribute="date_jday" name="date_jday" type="PoolInteger"/>
+				<var attribute="rain_day" name="rain_day" type="PoolInteger"/>
+				<var attribute="newday" name="newday" type="PoolInteger"/>
+				<var attribute="runoff" name="runoff" type="PoolDoubleArray"/>
+				<var attribute="precip" name="precip" type="PoolDoubleArray"/>
+				<var attribute="tmin" name="tmin" type="PoolDoubleArray"/>
+				<var attribute="tmax" name="tmax" type="PoolDoubleArray"/>
+			</module>
+		<module class="prms.io.ParameterIO_hru" name="ParameterIO_hru">
+				<var attribute="hruparameterInputPath" name="hruparameterInputPath" context="prms4"/>
+			    <var attribute="nhru" name="nhru" value="23"/>
+				<var attribute="carea_max" name="carea_max" type="PoolDoubleArray"/>
+				<var attribute="cov_type" name="cov_type" type="PoolIntegerArray"/>
+				<var attribute="covden_sum" name="covden_sum" type="PoolDoubleArray"/>
+				<var attribute="covden_win" name="covden_win" type="PoolDoubleArray"/>
+				<var attribute="dprst_pct_open" name="dprst_pct_open" type="PoolDoubleArray"/>
+				<var attribute="frozen" name="frozen" type="PoolIntegerArray "/>
+				<var attribute="groundmelt" name="groundmelt" type="PoolDoubleArray"/>
+				<var attribute="hru_area" name="hru_area" type="PoolDoubleArray"/>
+				<var attribute="hru_deplcrv" name="hru_deplcrv" type="PoolIntegerArray"/>
+				<var attribute="hru_elev" name="hru_elev" type="PoolDoubleArray"/>
+				<var attribute="hru_gwres" name="hru_gwres" type="PoolIntegerArray"/>
+				<var attribute="hru_percent_dprst" name="hru_percent_dprst"/>
+				<var attribute="hru_percent_imperv" name="hru_percent_imperv" type="PoolDoubleArray"/>
+				<var attribute="hru_psta" name="hru_psta" type="PoolIntegerArray"/>
+				<var attribute="hru_radpl" name="hru_radpl" type="PoolIntegerArray"/>
+				<var attribute="hru_solsta" name="hru_solsta" type="PoolIntegerArray"/>
+				<var attribute="hru_ssres" name="hru_ssres" type="PoolIntegerArray"/>
+				<var attribute="hru_tsta" name="hru_tsta" type="PoolIntegerArray"/>
+				<var attribute="hru_type" name="hru_type" type="PoolIntegerArray"/>
+				<var attribute="imperv_stor_max" name="imperv_stor_max" type=" PoolDoubleArray"/>
+				<var attribute="jh_coef_hru" name="jh_coef_hru" type="PoolDoubleArray"/>
+				<var attribute="pkwater_equiv" name="pkwater_equiv" type="PoolDoubleArray"/>
+				<var attribute="rad_trncf" name="rad_trncf" type="PoolDoubleArray"/>
+				<var attribute="smidx_coef" name="smidx_coef" type="PoolDoubleArray"/>
+				<var attribute="smidx_exp" name="smidx_exp" type="PoolDoubleArray"/>
+				<var attribute="snarea_thresh" name="snarea_thresh" type="PoolDoubleArray"/>
+				<var attribute="snow_intcp" name="snow_intcp" type="PoolDoubleArray"/>
+				<var attribute="snowinfil_max" name="snowinfil_max" type="PoolDoubleArray"/>
+				<var attribute="soil2gw_max" name="soil2gw_max" type="PoolDoubleArray"/>
+				<var attribute="soil_moist_init" name="soil_moist_init" type="PoolDoubleArray"/>
+				<var attribute="soil_moist_max" name="soil_moist_max" type="PoolDoubleArray"/>
+				<var attribute="soil_moist_srunoff" name="soil_moist_srunoff" type="PoolDoubleArray"/>
+				<var attribute="soil_rechr_init" name="soil_rechr_init" type="PoolDoubleArray"/>
+                <var attribute="soil_rechr_max" name="soil_rechr_max" type="PoolDoubleArray"/>
+				<var attribute="soil_type" name="soil_type" type="PoolIntegerArray"/>
+				<var attribute="srain_intcp" name="srain_intcp" type="PoolDoubleArray"/>
+				<var attribute="tmax_adj" name="tmax_adj" type="PoolDoubleArray"/>
+				<var attribute="tmin_adj" name="tmin_adj" type="PoolDoubleArray"/>
+				<var attribute="transp_beg" name="transp_beg" type="PoolIntegerArray"/>
+				<var attribute="transp_end" name="transp_end" type="PoolIntegerArray"/>
+				<var attribute="transp_tmax" name="transp_tmax" type="PoolDoubleArray"/>
+				<var attribute="wrain_intcp" name="wrain_intcp" type="PoolDoubleArray"/>
+			</module>
+		<module class="prms.io.ParameterIO_time" name="ParameterIO_time">
+		        <var attribute="TparameterInputPath" name="TparameterInputPath" context="prms4"/>
+			    <var attribute="adjmix_rain" name="adjmix_rain" type="PoolDoubleArray"/>
+				<var attribute="cecn_coef" name="cecn_coef" type="PoolDoubleArray"/>
+				<var attribute="dday_intcp" name="dday_intcp" type="PoolDoubleArray"/>
+				<var attribute="dday_slope" name="dday_slope" type="PoolDoubleArray"/>
+				<var attribute="epan_coef" name="epan_coef" type="PoolDoubleArray"/>
+				<var attribute="jh_coef" name="jh_coef" type="PoolDoubleArray"/>
+				<var attribute="ppt_rad_adj" name="ppt_rad_adj" type="PoolDoubleArray"/>
+				<var attribute="tmax_allrain" name="tmax_allrain" type="PoolDoubleArray"/>
+				<var attribute="tmax_index" name="tmax_index" type="PoolDoubleArray"/>
+				<var attribute="tmax_lapse" name="tmax_lapse" type="PoolDoubleArray"/>
+				<var attribute="tmin_lapse" name="tmin_lapse" type="PoolDoubleArray"/>
+				<var attribute="tstorm_mo" name="tstorm_mo" type="PoolDoubleArray"/>
+			</module>
+		<module class="prms.io.Parameter_Thru" name="Parameter_Thru">
+		        <var attribute="rain_adjInputPath1" name="rain_adjInputPath1" context="prms4"/>
+                <var attribute="snow_adjInputPath2" name="snow_adjInputPath2" context="prms4"/>
+                <var attribute="strain_adjInputPath3" name="strain_adjInputPath3" context="prms4"/>
+			    <var attribute="nhru" name="nhru" value="23"/>
+				<var attribute="rain_adj" name="rain_adj" type="PoolDouble2DArray"/>
+				<var attribute="snow_adj" name="snow_adj" type="PoolDouble2DArray"/>
+				<var attribute="strain_adj" name="strain_adj" type="PoolDouble2DArray"/>
+			</module>
+		<context class="net.casnw.home.model.SpatialContext" name="spatial">
+		    <var attribute="rowsNum" value="1"/>
+            <var attribute="colsNum" value="23"/>
+			<module class="prms.io.Spatial_flag" name="Spatial_flag">
+			    <var attribute="hru_flagInputPath" name="hru_flagInputPath" context="prms4"/>
+				<var attribute="hru_flag"   name="hru_flag" type="PoolInteger"/>
+			</module>
+			<module class="prms.io.InitBasin" name="InitBasin">
+			    <var attribute="nhru" name="nhru" value="23"/>
+				<var attribute="ngw" name="ngw" value="1"/>
+				<var attribute="nssr" name="nssr" value="2"/>
+				<var attribute="hru_percent_imperv" context="temp" name="hru_percent_imperv"/>
+				<var attribute="hru_area" context="temp" name="hru_area"/>
+				<var attribute="basin_area" context="temp" name="basin_area" value="218250"/>
+				<var attribute="hru_ssres" context="temp" name="hru_ssres"/>
+				<var attribute="hru_gwres" context="temp" name="hru_gwres"/>
+				<var attribute="hru_type" context="temp" name="hru_type"/>
+				<var attribute="dprst_flag" name="dprst_flag" value="1"/>
+				<var attribute="hru_percent_dprst" context="temp" name="hru_percent_dprst"/>
+				<var attribute="dprst_pct_open" context="temp" name="dprst_pct_open"/>
+				<var attribute="land_area" name="land_area"/>
+				<var attribute="water_area" name="water_area"/>
+				<var attribute="basin_area_inv" name="basin_area_inv"/>
+				<var attribute="active_hrus" name="active_hrus"/>
+				<var attribute="active_gwrs" name="active_gwrs"/>
+				<var attribute="hru_route_order" name="hru_route_order"/>
+				<var attribute="gwr_route_order" name="gwr_route_order"/>
+				<var attribute="ssres_area" name="ssres_area"/>
+				<var attribute="gwres_area" name="gwres_area"/>
+				<var attribute="hru_dprst" name="hru_dprst"/>
+				<var attribute="dem_dprst" name="dem_dprst"/>
+				<var attribute="dprst_open" name="dprst_open"/>
+				<var attribute="dprst_clos" name="dprst_clos"/>
+				<var attribute="hru_percent_impv" name="hru_percent_impv"/>
+				<var attribute="hru_imperv" name="hru_imperv"/>
+				<var attribute="hru_percent_perv" name="hru_percent_perv"/>
+				<var attribute="hru_perv" name="hru_perv"/>
+			</module>
+			<module class="prms.process.Basin" name="Basin">
+				<var attribute="hru_percent_imperv" name="hru_percent_imperv" context="temp"/>
+				<var attribute="hru_area" context="temp" name="hru_area"/>
+				<var attribute="hru_type" context="temp" name="hru_type"/>
+				<var attribute="dprst_flag" name="dprst_flag" value="1"/>
+				<var attribute="hru_percent_dprst" context="temp" name="hru_percent_dprst"/>
+				<var attribute="active_hrus" name="active_hrus" />
+				<var attribute="hru_route_order" name="hru_route_order"/>
+				<var attribute="hru_dprst" name="hru_dprst"/>
+				<var attribute="hru_percent_impv" name="hru_percent_impv"/>
+				<var attribute="hru_imperv" name="hru_imperv"/>
+				<var attribute="hru_percent_perv" name="hru_percent_perv"/>
+				<var attribute="hru_perv" name="hru_perv"/>
+				<var attribute="hru_flag" name="hru_flag"/>
+			</module>
+			<module class="prms.process.Temp1sta" name="Temp1sta">
+			    <var attribute="nhru" name="nhru" value="23"/>
+				<var attribute="ntemp" name="ntemp" value="2"/>
+				<var attribute="basin_tsta" name="basin_tsta" value="2"/>
+				<var attribute="temp_units" name="temp_units" value="0"/>
+				<var attribute="hru_area" context="temp" name="hru_area"/>
+				<var attribute="hru_elev" context="temp" name="hru_elev"/>
+				<var attribute="hru_tsta" context="temp" name="hru_tsta"/>
+				<var attribute="tmax_adj" context="temp" name="tmax_adj"/>
+				<var attribute="tmin_adj" context="temp" name="tmin_adj"/>
+				<var attribute="tmax_lapse" context="temp" name="tmax_lapse"/>
+				<var attribute="tmin_lapse" context="temp" name="tmin_lapse"/>
+				<var attribute="tsta_elev" name="tsta_elev"  value="7829.0,5670.0"/>
+				<var attribute="hru_route_order" name="hru_route_order"/>
+				<var attribute="basin_area_inv" name="basin_area_inv"/>
+				<var attribute="active_hrus" name="active_hrus"/>
+				<var attribute="tmax" context="temp" name="tmax"/>
+				<var attribute="tmin" context="temp" name="tmin"/>
+				<var attribute="route_on" context="temp" name="route_on"/>
+				<var attribute="date_mo" context="temp" name="date_mo"/>
+				<var attribute="date_day" context="temp" name="date_day"/>
+				<var attribute="basin_temp" name="basin_temp"/>
+				<var attribute="basin_tmax" name="basin_tmax"/>
+				<var attribute="basin_tmin" name="basin_tmin"/>
+				<var attribute="tavgc" name="tavgc"/>
+				<var attribute="tavgf" name="tavgf"/>
+				<var attribute="tmaxc" name="tmaxc"/>
+				<var attribute="tmaxf" name="tmaxf"/>
+				<var attribute="tminc" name="tminc"/>
+				<var attribute="tminf" name="tminf"/>
+				<var attribute="tempc" name="tempc"/>
+				<var attribute="tempf" name="tempf"/>
+				<var attribute="solrad_tmax" name="solrad_tmax"/>
+				<var attribute="solrad_tmin" name="solrad_tmin"/>
+				<var attribute="starttime" context="temp" name="starttime"/>
+			</module>
+			<module class="prms.process.Soltab" name="Soltab">
+			        <var attribute="ndays" name="ndays" value="366"/>
+				<var attribute="nradpl" name="nradpl" value="9"/>
+				<var attribute="radpl_lat" name="radpl_lat" value="38.5, 38.5, 38.5, 38.5, 38.5, 38.5, 38.5, 38.5, 38.5"/>
+				<var attribute="radpl_aspect" name="radpl_aspect" value="0.0, 90.0, 90.0, 45.0, 45.0, 45.0, 135.0, 135.0, 90.0"/>
+				<var attribute="radpl_slope" name="radpl_slope" value="0.0, 0.2000000029802, 0.3000000119209, 0.2000000029802, 0.3000000119209, 0.4000000059605, 0.2000000029802, 0.3000000119209, 0.4000000059605"/>
+				<var attribute="basin_lat" name="basin_lat"/>
+				<var attribute="hemisphere" name="hemisphere"/>
+				<var attribute="radpl_cossl" name="radpl_cossl"/>
+				<var attribute="sunhrs_soltab" name="sunhrs_soltab"/>
+				<var attribute="radpl_soltab" name="radpl_soltab"/>
+			</module>
+			<module class="prms.process.Precip" name="Precip">
+				<var attribute="nhru" name="nhru" value="23"/>
+				<var attribute="ntemp" name="ntemp" value="2"/>
+				<var attribute="nrain" name="nrain" value="5"/>
+				<var attribute="nstorm" name="nstorm" value="0"/>
+				<var attribute="solrad_tmax" name="solrad_tmax"/>
+			        <var attribute="route_on" context="temp" name="route_on"/>
+				<var attribute="temp_units" name="temp_units" value="0"/>
+				<var attribute="adjmix_rain" context="temp" name="adjmix_rain"/>
+				<var attribute="precip_units" name="precip_units" value="0"/>
+				<var attribute="hru_area" context="temp" name="hru_area"/>
+				<var attribute="rain_adj" context="temp" name="rain_adj"/>
+				<var attribute="snow_adj" context="temp" name="snow_adj"/>
+				<var attribute="strain_adj" context="temp" name="strain_adj"/>
+				<var attribute="hru_psta" context="temp" name="hru_psta"/>
+				<var attribute="tmax_allrain" context="temp" name="tmax_allrain"/>
+				<var attribute="tmax_allsnow" name="tmax_allsnow" value="31.63999939"/>
+				<var attribute="storm_scale_factor" name="storm_scale_factor"/>
+				<var attribute="basin_area_inv" name="basin_area_inv"/>
+				<var attribute="precip" name="precip" context="temp"/>
+				<var attribute="tempc" name="tempc"/>
+				<var attribute="tempf" name="tempf"/>
+				<var attribute="tmaxc" name="tmaxc"/>
+				<var attribute="tmaxf" name="tmaxf"/>
+				<var attribute="tminc" name="tminc"/>
+				<var attribute="tminf" name="tminf"/>
+				<var attribute="active_hrus" name="active_hrus"/>
+				<var attribute="hru_route_order" name="hru_route_order"/>
+				<var attribute="date_year" context="temp" name="date_year"/>
+				<var attribute="date_mo" context="temp" name="date_mo"/>
+				<var attribute="date_day" context="temp" name="date_day"/>
+				<var attribute="hru_ppt" name="hru_ppt"/>
+				<var attribute="hru_rain" name="hru_rain"/>
+				<var attribute="hru_snow" name="hru_snow"/>
+				<var attribute="newsnow" name="newsnow"/>
+				<var attribute="pptmix" name="pptmix"/>
+				<var attribute="prmx" name="prmx"/>
+				<var attribute="basin_rain" name="basin_rain"/>
+				<var attribute="basin_snow" name="basin_snow"/>
+				<var attribute="basin_obs_ppt" name="basin_obs_ppt"/>
+				<var attribute="basin_ppt" name="basin_ppt"/>
+			</module>
+			<module class="prms.process.Ddsolrad" name="Ddsolrad">
+				<var attribute="nhru" name="nhru" value="23"/>
+				<var attribute="nradpl" name="nradpl" value="9"/>
+				<var attribute="nsol" name="nsol" value="0"/>
+				<var attribute="dday_intcp" context="temp" name="dday_intcp"/>
+				<var attribute="dday_slope" context="temp" name="dday_slope"/>
+				<var attribute="hru_radpl" context="temp" name="hru_radpl"/>
+				<var attribute="ppt_rad_adj" context="temp" name="ppt_rad_adj"/>
+				<var attribute="radadj_intcp" name="radadj_intcp" value="1"/>
+				<var attribute="radadj_slope" name="radadj_slope" value="0"/>
+				<var attribute="radj_sppt" name="radj_sppt" value="0.439999998"/>
+				<var attribute="radj_wppt" name="radj_wppt" value="0.5"/>
+				<var attribute="hru_solsta" context="temp" name="hru_solsta"/>
+				<var attribute="radmax" name="radmax" value="0.800000012"/>
+				<var attribute="tmax_allrain" context="temp" name="tmax_allrain"/>
+				<var attribute="tmax_index" context="temp" name="tmax_index"/>
+				<var attribute="basin_solsta" name="basin_solsta" value="0"/>
+				<var attribute="rad_conv" name="rad_conv" value="1"/>
+				<var attribute="hru_area" name="hru_area" context="temp"/>
+				<var attribute="radpl_cossl" name="radpl_cossl"/>
+				<var attribute="radpl_soltab" name="radpl_soltab"/>
+				<var attribute="basin_obs_ppt" name="basin_obs_ppt"/>
+				<var attribute="solrad_tmax" name="solrad_tmax"/>
+				<var attribute="newday" context="temp" name="newday"/>
+				<var attribute="active_hrus" name="active_hrus"/>
+				<var attribute="hru_route_order" name="hru_route_order"/>
+				<var attribute="basin_area_inv" name="basin_area_inv"/>
+				<var attribute="hemisphere" name="hemisphere"/>
+				<var attribute="date_mo" context="temp" name="date_mo"/>
+				<var attribute="date_jday" context="temp" name="date_jday"/>
+				<var attribute="swrad" name="swrad"/>
+				<var attribute="basin_potsw" name="basin_potsw"/>
+				<var attribute="orad" name="orad"/>
+				<var attribute="basin_horad" name="basin_horad"/>
+			</module>
+			<module class="prms.process.PotetJh" name="PotetJh">
+				<var attribute="nhru" name="nhru" value="23"/>
+				<var attribute="nsol" name="nsol" value="0"/>
+				<var attribute="hru_area" context="temp" name="hru_area"/>
+				<var attribute="jh_coef" context="temp" name="jh_coef"/>
+				<var attribute="jh_coef_hru" context="temp" name="jh_coef_hru"/>
+				<var attribute="swrad" name="swrad"/>
+				<var attribute="tavgc" name="tavgc"/>
+				<var attribute="tavgf" name="tavgf"/>
+				<var attribute="newday" context="temp" name="newday"/>
+				<var attribute="active_hrus" name="active_hrus"/>
+				<var attribute="hru_route_order" name="hru_route_order"/>
+				<var attribute="basin_area_inv" name="basin_area_inv"/>
+				<var attribute="date_mo" context="temp" name="date_mo"/>
+				<var attribute="date_day" context="temp" name="date_day"/>
+				<var attribute="starttime" context="temp" name="starttime"/>
+				<var attribute="deltim" context="temp" name="deltim"/>
+				<var attribute="route_on" context="temp" name="route_on"/>
+				<var attribute="potet" name="potet"/>
+				<var attribute="basin_potet" name="basin_potet"/>
+				<var attribute="basin_potet_jh" name="basin_potet_jh"/>
+				</module>
+			<module class="prms.process.TranspTindex" name="TranspTindex">
+				<var attribute="nhru" name="nhru" value="23"/>
+				<var attribute="temp_units" name="temp_units" value="0"/>
+				<var attribute="transp_beg" context="temp" name="transp_beg"/>
+				<var attribute="transp_end" context="temp" name="transp_end"/>
+				<var attribute="transp_tmax" context="temp" name="transp_tmax"/>
+				<var attribute="tmaxc" name="tmaxc"/>
+				<var attribute="tmaxf" name="tmaxf"/>
+				<var attribute="newday" context="temp" name="newday"/>
+				<var attribute="active_hrus" name="active_hrus"/>
+				<var attribute="hru_route_order" name="hru_route_order"/>
+				<var attribute="date_mo" context="temp" name="date_mo"/>
+				<var attribute="date_day" context="temp" name="date_day"/>
+				<var attribute="starttime" context="temp" name="starttime"/>
+				<var attribute="deltim" context="temp" name="deltim"/>
+				<var attribute="route_on" context="temp" name="route_on"/>
+				<var attribute="basin_transp_on" name="basin_transp_on"/>
+				<var attribute="transp_on" name="transp_on"/>
+			</module>
+			<module class="prms.process.Intcp" name="Intcp">
+				<var attribute="nhru" name="nhru" value="23"/>
+				<var attribute="nevap" name="nevap" value="0"/>
+				<var attribute="epan_coef" context="temp" name="epan_coef"/>
+				<var attribute="hru_area" context="temp" name="hru_area"/>
+				<var attribute="snow_intcp" context="temp" name="snow_intcp"/>
+				<var attribute="srain_intcp" context="temp" name="srain_intcp"/>
+				<var attribute="wrain_intcp" context="temp" name="wrain_intcp"/>
+				<var attribute="cov_type" context="temp" name="cov_type"/>
+				<var attribute="covden_sum" context="temp" name="covden_sum"/>
+				<var attribute="covden_win" context="temp" name="covden_win"/>
+				<var attribute="potet_sublim" name="potet_sublim" value="0.75"/>
+				<var attribute="hru_type" context="temp" name="hru_type"/>
+				<var attribute="pkwater_equiv" context="temp" name="pkwater_equiv"/>
+				<var attribute="hru_rain" name="hru_rain"/>
+				<var attribute="hru_snow" name="hru_snow"/>
+				<var attribute="hru_ppt" name="hru_ppt"/>
+				<var attribute="basin_ppt" name="basin_ppt"/>
+				<var attribute="transp_on" name="transp_on"/>
+				<var attribute="tmaxf" name="tmaxf"/>
+				<var attribute="tavgc" name="tavgc"/>
+				<var attribute="swrad" name="swrad"/>
+				<var attribute="pan_evap" name="pan_evap"/>
+				<var attribute="potet" name="potet"/>
+				<var attribute="route_on" context="temp" name="route_on"/>
+				<var attribute="active_hrus" name="active_hrus"/>
+				<var attribute="hru_route_order" name="hru_route_order"/>
+				<var attribute="date_mo" context="temp" name="date_mo"/>
+				<var attribute="deltim" context="temp" name="deltim"/>
+				<var attribute="basin_area_inv" name="basin_area_inv"/>
+				<var attribute="hru_intcpevap" name="hru_intcpevap"/>
+				<var attribute="hru_intcpstor" name="hru_intcpstor"/>
+				<var attribute="last_intcp_stor" name="last_intcp_stor"/>
+				<var attribute="net_rain" name="net_rain"/>
+				<var attribute="net_snow" name="net_snow"/>
+				<var attribute="net_ppt" name="net_ppt"/>
+				<var attribute="basin_net_ppt" name="basin_net_ppt"/>
+				<var attribute="intcp_stor" name="intcp_stor"/>
+				<var attribute="basin_intcp_stor" name="basin_intcp_stor"/>
+				<var attribute="intcp_evap" name="intcp_evap"/>
+				<var attribute="basin_intcp_evap" name="basin_intcp_evap"/>
+				<var attribute="intcp_form" name="intcp_form"/>
+				<var attribute="intcp_on" name="intcp_on"/>
+				<var attribute="newsnow" name="newsnow"/>
+				<var attribute="pptmix" name="pptmix"/>
+			</module>
+			<module class="prms.process.Snowcomp" name="Snowcomp">
+				<var attribute="nhru" name="nhru" value="23"/>
+				<var attribute="nsol" name="nsol" value="0"/>
+				<var attribute="nradpl" name="nradpl" value="9"/>
+				<var attribute="ndepl" name="ndepl" value="1"/>
+				<var attribute="ndeplval" name="ndeplval" value="11"/>
+				<var attribute="den_init" name="den_init" value="0.100000001"/>
+				<var attribute="settle_const" name="settle_const" value="0.100000001"/>
+				<var attribute="melt_look" name="melt_look" value="0"/>
+				<var attribute="melt_force" name="melt_force" value="120"/>
+				<var attribute="rad_trncf" context="temp" name="rad_trncf"/>
+				<var attribute="hru_deplcrv" context="temp" name="hru_deplcrv"/>
+				<var attribute="emis_noppt" name="emis_noppt" value="0.975000024"/>
+				<var attribute="cecn_coef" context="temp" name="cecn_coef"/>
+				<var attribute="cov_type" context="temp" name="cov_type"/>
+				<var attribute="den_max" name="den_max" value="0.5"/>
+				<var attribute="hru_area" context="temp" name="hru_area"/>
+				<var attribute="basin_area" name="basin_area" value="218250"/>
+				<var attribute="potet_sublim" name="potet_sublim" value="0.75"/>
+				<var attribute="covden_sum" context="temp" name="covden_sum"/>
+				<var attribute="covden_win" context="temp" name="covden_win"/>
+				<var attribute="albset_rnm" name="albset_rnm" value="0.600000024"/>
+				<var attribute="albset_rna" name="albset_rna" value="0.800000012"/>
+				<var attribute="albset_snm" name="albset_snm" value="0.200000003"/>
+				<var attribute="albset_sna" name="albset_sna" value="0.050000001"/>
+				<var attribute="snarea_curve" name="snarea_curve" value="0.05000000074506, 0.2399999946356, 0.4000000059605, 0.5299999713898, 0.6499999761581, 0.75, 0.8199999928474, 0.8799999952316, 0.9300000071526, 0.9900000095367, 1.0"/>
+				<var attribute="snarea_thresh" context="temp" name="snarea_thresh"/>
+				<var attribute="tmax_allsnow" context="temp" name="tmax_allsnow" value="31.63999939"/>
+				<var attribute="freeh2o_cap" name="freeh2o_cap" value="0.050000001"/>
+				<var attribute="tstorm_mo" context="temp" name="tstorm_mo"/>
+				<var attribute="groundmelt" context="temp" name="groundmelt"/>
+				<var attribute="hru_type" context="temp" name="hru_type"/>
+				<var attribute="glacier_flag" name="glacier_flag" value="0"/>
+				<var attribute="date_mo" context="temp" name="date_mo"/>
+				<var attribute="date_jday" context="temp" name="date_jday"/>
+				<var attribute="date_jwday" name="date_jwday"/>
+				<var attribute="date_day" context="temp" name="date_day"/>
+				<var attribute="date_year" context="temp" name="date_year"/>
+				<var attribute="net_ppt" name="net_ppt"/>
+				<var attribute="net_snow" name="net_snow"/>
+				<var attribute="net_rain" name="net_rain"/>
+				<var attribute="basin_ppt" name="basin_ppt"/>
+				<var attribute="tmaxf" name="tmaxf"/>
+				<var attribute="tminf" name="tminf"/>
+				<var attribute="tavgc" name="tavgc"/>
+				<var attribute="transp_on" name="transp_on"/>
+				<var attribute="potet" name="potet"/>
+				<var attribute="prmx" name="prmx"/>
+				<var attribute="pptmix" name="pptmix"/>
+				<var attribute="orad" name="orad"/>
+				<var attribute="deltim" context="temp" name="deltim"/>
+				<var attribute="basin_horad" name="basin_horad"/>
+				<var attribute="active_hrus" name="active_hrus"/>
+				<var attribute="hru_route_order" name="hru_route_order"/>
+				<var attribute="basin_area_inv" name="basin_area_inv"/>
+				<var attribute="hru_intcpevap" name="hru_intcpevap"/>
+				<var attribute="route_on" context="temp" name="route_on"/>
+				<var attribute="gmelt_to_soil" name="gmelt_to_soil"/>
+				<var attribute="albedo" name="albedo"/>
+				<var attribute="tcal" name="tcal"/>
+				<var attribute="snow_evap" name="snow_evap"/>
+				<var attribute="snowmelt" name="snowmelt"/>
+				<var attribute="basin_snowmelt" name="basin_snowmelt"/>
+				<var attribute="basin_pweqv" name="basin_pweqv"/>
+				<var attribute="basin_snowdepth" name="basin_snowdepth"/>
+				<var attribute="pkwater_equiv" context="temp" name="pkwater_equiv"/>
+				<var attribute="pk_depth" name="pk_depth"/>
+				<var attribute="snowcov_area" name="snowcov_area"/>
+				<var attribute="pptmix_nopack" name="pptmix_nopack"/>
+				<var attribute="basin_snowcov" name="basin_snowcov"/>
+				<var attribute="basin_snowevap" name="basin_snowevap"/>
+				<var attribute="pkwater_ante" name="pkwater_ante"/>
+				<var attribute="basin_pk_precip" name="basin_pk_precip"/>
+				<var attribute="newsnow" name="newsnow"/>
+			</module>
+			<module class="prms.process.SrunoffSmidx" name="SrunoffSmidx">
+				<var attribute="nhru" name="nhru" value="23"/>
+				<var attribute="hru_area" context="temp" name="hru_area"/>
+				<var attribute="hru_type" context="temp" name="hru_type"/>
+				<var attribute="imperv_stor_max" context="temp" name="imperv_stor_max"/>
+				<var attribute="smidx_coef" context="temp" name="smidx_coef"/>
+				<var attribute="smidx_exp" context="temp" name="smidx_exp"/>
+				<var attribute="carea_max" name="carea_max" context="temp"/>
+				<var attribute="soil_moist_max" context="temp" name="soil_moist_max"/>
+				<var attribute="soil_moist_init" context="temp" name="soil_moist_init"/>
+				<var attribute="snowinfil_max" context="temp" name="snowinfil_max"/>
+				<var attribute="soil_moist" name="soil_moist"/>
+				<var attribute="date_mo" context="temp" name="date_mo"/>
+				<var attribute="date_day" context="temp" name="date_day"/>
+				<var attribute="hru_percent_impv" name="hru_percent_impv"/>
+				<var attribute="pptmix_nopack" name="pptmix_nopack"/>
+				<var attribute="net_rain" name="net_rain"/>
+				<var attribute="hru_imperv" name="hru_imperv"/>
+				<var attribute="snowmelt" name="snowmelt"/>
+				<var attribute="pkwater_equiv" context="temp" name="pkwater_equiv"/>
+				<var attribute="net_ppt" name="net_ppt"/>
+				<var attribute="net_snow" name="net_snow"/>
+				<var attribute="hru_perv" name="hru_perv"/>
+				<var attribute="hru_ppt" name="hru_ppt"/>
+				<var attribute="snow_evap" name="snow_evap"/>
+				<var attribute="potet" name="potet"/>
+				<var attribute="active_hrus" name="active_hrus"/>
+				<var attribute="route_on" context="temp" name="route_on"/>
+				<var attribute="snowcov_area" name="snowcov_area"/>
+				<var attribute="hru_intcpevap" name="hru_intcpevap"/>
+				<var attribute="hru_route_order" name="hru_route_order"/>
+				<var attribute="basin_area_inv" name="basin_area_inv"/>
+				<var attribute="basin_sroff" name="basin_sroff"/>
+				<var attribute="dt_sroff" name="dt_sroff"/>
+				<var attribute="basin_infil" name="basin_infil"/>
+				<var attribute="imperv_evap" name="imperv_evap"/>
+				<var attribute="basin_imperv_evap" name="basin_imperv_evap"/>
+				<var attribute="basin_imperv_stor" name="basin_imperv_stor"/>
+				<var attribute="imperv_stor" name="imperv_stor"/>
+				<var attribute="infil" name="infil"/>
+				<var attribute="sroff" name="sroff"/>
+				<var attribute="hru_impervstor" name="hru_impervstor"/>
+				<var attribute="hru_impervevap" name="hru_impervevap"/>
+				<var attribute="dprst_evap_hru" name="dprst_evap_hru"/>
+				<var attribute="upslope_hortonian" name="upslope_hortonian"/>
+			</module>
+			<module class="prms.process.Smbal" name="Smbal">
+				<var attribute="nhru" name="nhru" value="23"/>
+				<var attribute="dprst_flag" name="dprst_flag" value="1"/>
+				<var attribute="hru_area" context="temp" name="hru_area"/>
+				<var attribute="basin_area" name="basin_area" value="218250"/>
+				<var attribute="soil_type" context="temp" name="soil_type"/>
+				<var attribute="cov_type" context="temp" name="cov_type"/>
+				<var attribute="soil_rechr_init" context="temp" name="soil_rechr_init"/>
+				<var attribute="sroff" name="sroff"/>
+				<var attribute="soil_moist_init" context="temp" name="soil_moist_init"/>
+				<var attribute="soil_moist_max" context="temp" name="soil_moist_max"/>
+				<var attribute="soil_rechr_max" context="temp" name="soil_rechr_max"/>
+				<var attribute="soil2gw_max" context="temp" name="soil2gw_max"/>
+				<var attribute="hru_type" context="temp" name="hru_type"/>
+				<var attribute="frozen" context="temp" name="frozen"/>
+				<var attribute="date" context="temp" name="date"/>
+				<var attribute="date_mo" context="temp" name="date_mo"/>
+				<var attribute="date_day" context="temp" name="date_day"/>
+				<var attribute="deltim" context="temp" name="deltim"/>
+				<var attribute="active_hrus" name="active_hrus"/>
+				<var attribute="route_on" context="temp" name="route_on"/>
+				<var attribute="hru_perv" name="hru_perv"/>
+				<var attribute="infil" name="infil"/>
+				<var attribute="snowcov_area" name="snowcov_area"/>
+				<var attribute="transp_on" name="transp_on"/>
+				<var attribute="potet" name="potet"/>
+				<var attribute="snow_evap" name="snow_evap"/>
+				<var attribute="hru_ppt" name="hru_ppt"/>
+				<var attribute="hru_route_order" name="hru_route_order"/>
+				<var attribute="hru_intcpevap" name="hru_intcpevap"/>
+				<var attribute="hru_impervevap" name="hru_impervevap"/>
+				<var attribute="hru_percent_perv" name="hru_percent_perv"/>
+				<var attribute="basin_area_inv" name="basin_area_inv"/>
+				<var attribute="dprst_evap_hru" name="dprst_evap_hru"/>
+				<var attribute="basin_actet" name="basin_actet"/>
+				<var attribute="basin_soil_rechr" name="basin_soil_rechr"/>
+				<var attribute="basin_perv_et" name="basin_perv_et"/>
+				<var attribute="basin_soil_to_gw" name="basin_soil_to_gw"/>
+				<var attribute="basin_lakeevap" name="basin_lakeevap"/>
+				<var attribute="basin_soil_moist" name="basin_soil_moist"/>
+				<var attribute="basin_gmelt2soil" name="basin_gmelt2soil"/>
+				<var attribute="soil_rechr" name="soil_rechr"/>
+				<var attribute="soil_moist" name="soil_moist"/>
+				<var attribute="soil_to_gw" name="soil_to_gw"/>
+				<var attribute="soil_to_ssr" name="soil_to_ssr"/>
+				<var attribute="perv_actet" name="perv_actet"/>
+				<var attribute="hru_actet" name="hru_actet"/>
+				<var attribute="gmelt_to_soil" name="gmelt_to_soil"/>
+			</module>			
+			<module class="prms.process.Ssflow" name="Ssflow">
+				<var attribute="nhru" name="nhru" value="23"/>
+				<var attribute="nssr" name="nssr" value="2"/>
+				<var attribute="active_hrus" name="active_hrus"/>
+				<var attribute="basin_area" name="basin_area" value="218250"/>
+				<var attribute="hru_area" context="temp" name="hru_area"/>
+				<var attribute="hru_ssres" context="temp" name="hru_ssres"/>
+				<var attribute="ssstor_init" name="ssstor_init" value="0.0,0.0"/>
+				<var attribute="ssrcoef_lin" name="ssrcoef_lin" value="0.1010000035167,0.1000000014901 "/>
+				<var attribute="ssrcoef_sq" name="ssrcoef_sq" value="0.085,0.04500000178814"/>
+				<var attribute="ssr2gw_rate" name="ssr2gw_rate" value="0.01999999955297,0.01999999955297"/>
+				<var attribute="ssrmax_coef" name="ssrmax_coef" value="1.0,1.0"/>
+				<var attribute="ssr2gw_exp" name="ssr2gw_exp" value="1.0,1.0"/>
+				<var attribute="hru_type" context="temp" name="hru_type"/>
+				<var attribute="frozen" context="temp" name="frozen"/>
+				<var attribute="basin_area_inv" name="basin_area_inv"/>
+				<var attribute="deltim" context="temp" name="deltim"/>
+				<var attribute="ssres_area" name="ssres_area"/>
+				<var attribute="soil_to_ssr" name="soil_to_ssr"/>
+				<var attribute="hru_perv" name="hru_perv"/>
+				<var attribute="hru_route_order" name="hru_route_order"/>
+				<var attribute="ssr_to_gw" name="ssr_to_gw"/>
+				<var attribute="ssres_flow" name="ssres_flow"/>
+				<var attribute="ssres_in" name="ssres_in"/>
+				<var attribute="ssres_stor" name="ssres_stor"/>
+				<var attribute="basin_ssr2gw" name="basin_ssr2gw"/>
+				<var attribute="basin_ssvol" name="basin_ssvol"/>
+				<var attribute="basin_ssstor" name="basin_ssstor"/>
+				<var attribute="basin_ssflow" name="basin_ssflow"/>
+				<var attribute="basin_ssinInitBasin" name="basin_ssin"/>
+			</module>
+			<module class="prms.process.Gwflow" name="Gwflow">
+			    <var attribute="nhru" name="nhru" value="23"/>
+				<var attribute="nssr" name="nssr" value="2"/>
+				<var attribute="ngw" name="ngw" value="1"/>
+				<var attribute="basin_area" name="basin_area" value="218250"/>
+			    <var attribute="hru_area" context="temp" name="hru_area"/>
+				<var attribute="gwstor_init" name="gwstor_init" value="1,0"/>
+				<var attribute="hru_gwres" context="temp" name="hru_gwres"/>
+				<var attribute="ssr_gwres" name="ssr_gwres" value="1,1"/>
+				<var attribute="gwflow_coef" context="temp" name="gwflow_coef" value="0.01269999984652"/>
+				<var attribute="gwsink_coef" context="temp" name="gwsink_coef" value="0.0"/>
+				<var attribute="basin_area_inv" context="temp" name="basin_area_inv"/>
+				<var attribute="deltim" context="temp" name="deltim"/>
+				<var attribute="gwres_area" name="gwres_area"/>
+				<var attribute="soil_to_gw" name="soil_to_gw"/>
+				<var attribute="ssr_to_gw" name="ssr_to_gw"/>
+				<var attribute="hru_perv" name="hru_perv"/>
+				<var attribute="ssres_area" name="ssres_area"/>
+				<var attribute="active_hrus" name="active_hrus"/>
+				<var attribute="active_gwrs" name="active_gwrs"/>
+				<var attribute="hru_route_order" name="hru_route_order"/>
+				<var attribute="gwr_route_order" name="gwr_route_order"/>
+				<var attribute="basin_gwflow" name="basin_gwflow"/>
+				<var attribute="basin_gwstor" name="basin_gwstor"/>
+				<var attribute="basin_gwsink" name="basin_gwsink"/>
+				<var attribute="basin_gwin" name="basin_gwin"/>
+				<var attribute="gwres_stor" name="gwres_stor"/>
+				<var attribute="gw_in_soil" name="gw_in_soil"/>
+				<var attribute="gw_in_ssr" name="gw_in_ssr"/>
+				<var attribute="gwres_in" name="gwres_in"/>
+				<var attribute="gwres_flow" name="gwres_flow"/>
+				<var attribute="gwres_sink" name="gwres_sink"/>
+			</module>
+			<module class="prms.process.Strmflow" name="Strmflow">
+			    <var attribute="nhru" name="nhru" value="23"/>
+				<var attribute="nssr" name="nssr" value="2"/>
+				<var attribute="route_on" context="temp" name="route_on"/>
+				<var attribute="ngw" name="ngw" value="1"/>
+				<var attribute="basin_area" name="basin_area" value="218250"/>
+				<var attribute="hru_area" context="temp" name="hru_area"/>
+				<var attribute="basin_sroff" name="basin_sroff"/>
+				<var attribute="basin_gwflow" name="basin_gwflow"/>
+				<var attribute="basin_ssflow" name="basin_ssflow"/>
+				<var attribute="hru_route_order" name="hru_route_order"/>
+				<var attribute="basin_area_inv" name="basin_area_inv"/>
+				<var attribute="active_hrus" name="active_hrus"/>
+				<var attribute="deltim" context="temp" name="deltim"/>
+				<var attribute="basin_stflow" name="basin_stflow"/>
+				<var attribute="basin_cms" name="basin_cms"/>
+				<var attribute="basin_sroff_cfs" name="basin_sroff_cfs"/>
+				<var attribute="basin_ssflow_cfs" name="basin_ssflow_cfs"/>
+				<var attribute="basin_gwflow_cfs" name="basin_gwflow_cfs"/>
+				<var attribute="basin_cfs" name="basin_cfs"/>
+			</module>
+			<module class="prms.io.WriteOut" name="WriteOut">
+			    <var attribute="outputPath" name="outputPath" context="prms4"/>
+				<var attribute="basin_stflow" name="basin_stflow"/>
+				<var attribute="basin_cms" name="basin_cms"/>
+				<var attribute="potet" name="potet"/>
+				<var attribute="tavgf" name="tavgf"/>
+				<var attribute="swrad" name="swrad"/>
+				<var attribute="basin_cfs" name="basin_cfs"/>
+			</module>		
+		</context>	
+	</context>
+</model>
